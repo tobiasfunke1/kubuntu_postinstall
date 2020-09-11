@@ -12,7 +12,7 @@ sudo apt autoremove kdeconnect avahi-daemon avahi-autoipd
 sudo apt install ufw python3-pip gparted thunderbird thunderbird-locale-en thunderbird-locale-de
 sudo apt install firefox firefox-locale-en firefox-locale-de enigmail
 sudo apt install lshw usbutils pcituils net-tools efibootmgr efitools efivar
-sudo apt install pass qtpass sshfs meld binwalk git
+sudo apt install pass qtpass sshfs meld binwalk git htop
 
 # dev install
 snap install pycharm-professional --classic
@@ -24,6 +24,9 @@ sudo systemctl disable cups.service
 sudo systemctl stop cups.service
 sudo systemctl disable cups-browsed.service
 sudo systemctl stop cups-browsed.service
+
+# swap
+TODO: add swap info
 
 # firefox addons:
 https everywhere
