@@ -25,17 +25,38 @@ sudo systemctl stop cups.service
 sudo systemctl disable cups-browsed.service
 sudo systemctl stop cups-browsed.service
 
-# swap
-TODO: add swap info
+# swap [https://www.howtoforge.com/automatically-unlock-luks-encrypted-drives-with-a-keyfile]
+sudo dd if=/dev/urandom of=/root/keyfile bs=1024 count=4
+sudo chmod 0400 /root/keyfile
+sudo cryptsetup -v luksFormat /dev/sdb /root/keyfile
+sudo cryptsetup luksDump /dev/sdb
+sudo cryptsetup luksOpen /dev/sdb sdX_crypt --key-file /root/keyfile
+sudo mkswap /dev/mapper/sdX_crypt [-c]
+
+sudo nano /etc/fstab
+/dev/mapper/sdX_crypt none swap sw 0 0
+
+lsblk -o NAME,UUID
+sudo nano /etc/crypttab
+sdX_crypt UUID=XXXXXXXXXXX /root/keyfile luks
+
 
 # firefox addons:
 https everywhere
 ghostery
 ublock origin
 
-# ssh [https://blog.g3rt.nl/upgrade-your-ssh-keys.html]
+# ssh [https://blog.g3rt.nl/upgrade-your-ssh-keys.html, https://medium.com/tarkalabs/ssh-simplified-using-ssh-config-161406ba75d7]
 ssh-keygen -o -a 100 -t ed25519
-TODO: add ssh config file example
+
+~/.ssh/config
+Host abc
+   HostName abc.de
+   User user
+   Port 22
+   IdentityFile ~/.ssh/id_abc
+   IdentitiesOnly yes
+   PreferredAuthentications publickey
 
 # gpg
 gpg --full-generate-key
@@ -54,8 +75,6 @@ include special symbols
 
 # sddm design [https://github.com/sddm/sddm/issues/721]
 change to black (#000000) in /usr/share/sddm/themes/breeze/theme.conf
-
-
 
 
 
