@@ -36,7 +36,7 @@ sudo mkswap /dev/mapper/sdX_crypt [-c]
 sudo nano /etc/fstab
 /dev/mapper/sdX_crypt none swap sw 0 0
 
-lsblk -o NAME,UUID
+lsblk -f
 sudo nano /etc/crypttab
 sdX_crypt UUID=XXXXXXXXXXX /root/keyfile luks
 
